@@ -1,4 +1,4 @@
-name: bookAPI CI/CD
+name: reviewAPI CI/CD
 
 on:
   push:
@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Push to repo
+      - name: Start
         uses: actions/checkout@v3
       - name: Install Python
         uses: actions/setup-python@v3
