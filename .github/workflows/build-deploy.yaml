@@ -19,7 +19,7 @@ jobs:
         run: python -m pip install --upgrade pip
       - name: Install dependencies
         run: pip install -r requirements.txt
-        env:  ${{ secretes.REVIEW_DB_URL }}
+        env:  ${{ secrets.REVIEW_DB_URL }}
       - name: Install pytest
         run: pip install pytest
       - name: Run test
