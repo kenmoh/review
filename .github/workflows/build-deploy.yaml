@@ -25,6 +25,8 @@ jobs:
   test:
     name: Test app
     runs-on: ubuntu-latest
+    env:
+      REVIEW_DB_URL: ${{ secrets.REVIEW_DB_URL }}
     needs:
       - build
     steps:
