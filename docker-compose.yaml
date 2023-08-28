@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  api:
+    build: .
+    container_name: review-container
+    image: review-api
+    env_file:
+      - ./.env
+    ports:
+      - '8001:8000'
+    volumes:
+      - ./:/app:ro
+    command: uvicorn app.main:app --host 0.0.0.0 --reload
