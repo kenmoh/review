@@ -53,7 +53,7 @@ def get_average_rating_by_book(book_id, db: session):
 def delete_book_reviews(book_id: int, db: session):
     db_book_reviews = db.query(Review).filter(Review.book_id == book_id).all()
 
-    if db_book_reviews is None:
+    if not db_book_reviews:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'Book with ID: {book_id} not found!')
     db.delete(db_book_reviews)
     db.commit()
