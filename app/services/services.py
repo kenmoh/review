@@ -55,5 +55,6 @@ def delete_book_reviews(book_id: int, db: session):
 
     if not db_book_reviews:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'Book with ID: {book_id} not found!')
-    db.delete(db_book_reviews)
-    db.commit()
+    for db_book_review in db_book_reviews:
+        db.delete(db_book_reviews)
+        db.commit()
