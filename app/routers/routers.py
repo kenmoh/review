@@ -27,3 +27,8 @@ def get_book_reviews(book_id: int, db: Session = Depends(get_db)) -> list[Review
 @review_router.get('/average-rating/{book_id}', status_code=status.HTTP_200_OK)
 def get_book_avg_rating(book_id: int, db: Session = Depends(get_db)) -> float:
     return services.get_average_rating_by_book(book_id, db)
+
+
+@review_router.delete('/delete-reviews/{book_id}', status_code=status.HTTP_204_NO_CONTENT)
+def delete_book_reviews(book_id: int, db: Session = Depends(get_db)):
+    return services.delete_book_reviews(book_id, db)

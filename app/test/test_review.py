@@ -37,7 +37,9 @@ def test_create_review():
 
 def test_average_book_rating():
     response = client.get(f'{BASE_URL}/average-rating/5')
-    print(response.json())
     assert response.status_code == status.HTTP_200_OK
 
 
+def test_delete_book_reviews():
+    response = client.delete(f'{BASE_URL}/delete-reviews/4')
+    assert response.status_code == status.HTTP_204_NO_CONTENT
