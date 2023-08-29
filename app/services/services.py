@@ -40,9 +40,6 @@ def get_all_reviews_by_book(book_id, db: session):
 
 
 def get_average_rating_by_book(book_id, db: session):
-    db_book_id = db.query(Review).filter(Review.book_id == book_id).first()
-    if db_book_id.id is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'Book with ID: {book_id} not found!')
     try:
         ratings = db.query(Review).filter(Review.book_id == book_id).all()
         if len(ratings) > 0:
