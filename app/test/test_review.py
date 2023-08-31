@@ -41,5 +41,5 @@ def test_average_movie_rating():
 
 
 def test_delete_movie_reviews():
-    response = client.delete(f'{BASE_URL}/delete-reviews/2')
+    response = client.delete(f'{BASE_URL}/delete-reviews/1')
     assert response.status_code == status.HTTP_204_NO_CONTENT
