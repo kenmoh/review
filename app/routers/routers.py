@@ -31,4 +31,4 @@ def get_movie_avg_rating(movie_id: int, db: Session = Depends(get_db)) -> float:
 
 @review_router.delete('/delete-reviews/{movie_id}', status_code=status.HTTP_204_NO_CONTENT)
 def delete_movie_reviews(movie_id: int, db: Session = Depends(get_db)):
-    return services.delete_book_reviews(movie_id, db)
+    return services.delete_movie_reviews(movie_id, db)
