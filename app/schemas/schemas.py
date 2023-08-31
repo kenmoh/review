@@ -2,12 +2,12 @@ from pydantic import BaseModel, Field
 
 
 class ReviewCreateSchema(BaseModel):
-    review_by: str
-    review_body: str
+    author: str
+    comment: str
     rating: int | None = Field(gt=0, le=5)
 
 
 class ReviewResponseSchema(ReviewCreateSchema):
     id: int
-    book_id: int
+    movie_id: int
 

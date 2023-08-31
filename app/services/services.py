@@ -12,14 +12,14 @@ def get_all_reviews(db: session):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
 
-def add_new_review(book_id: int, review: ReviewCreateSchema, db: session):
+def add_new_review(movie_id: int, review: ReviewCreateSchema, db: session):
     try:
         with session.begin():
 
             new_review = Review(
-                book_id=book_id,
-                review_body=review.review_body,
-                review_by=review.review_by,
+                movie_id=movie_id,
+                author=review.author,
+                comment=review.comment,
                 rating=review.rating
             )
             db.add(new_review)
@@ -32,17 +32,17 @@ def add_new_review(book_id: int, review: ReviewCreateSchema, db: session):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
 
-def get_all_reviews_by_book(book_id, db: session):
+def get_all_reviews_by_movie(movie_id, db: session):
     try:
-        return db.query(Review).filter(Review.book_id == book_id).all()
+        return db.query(Review).filter(Review.movie_id == movie_id).all()
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
 
-def get_average_rating_by_book(book_id, db: session):
+def get_average_rating_by_movie(movie_id, db: session):
     try:
 
-        ratings = db.query(Review).filter(Review.book_id == book_id).all()
+        ratings = db.query(Review).filter(Review.movie_id == movie_id).all()
         if len(ratings) > 0:
             return sum([rating.rating for rating in ratings]) / len(ratings)
         return 0
@@ -50,11 +50,11 @@ def get_average_rating_by_book(book_id, db: session):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
 
-def delete_book_reviews(book_id: int, db: session):
-    db_book_reviews = db.query(Review).filter(Review.book_id == book_id).all()
+def delete_movie_reviews(movie_id: int, db: session):
+    db_movie_reviews = db.query(Review).filter(Review.movie_id == movie_id).all()
 
-    if not db_book_reviews:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'Book with ID: {book_id} not found!')
-    for db_book_review in db_book_reviews:
-        db.delete(db_book_review)
+    if not db_movie_reviews:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'Book with ID: {movie_id} not found!')
+    for db_movie_review in db_movie_reviews:
+        db.delete(db_movie_review)
         db.commit()
