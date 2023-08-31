@@ -40,6 +40,14 @@ def test_average_movie_rating():
     assert response.status_code == status.HTTP_200_OK
 
 
+def test_delete_review():
+    response = client.delete(f'{BASE_URL}/delete-review/5')
+    assert response.status_code == status.HTTP_204_NO_CONTENT
+
+
 def test_delete_movie_reviews():
     response = client.delete(f'{BASE_URL}/delete-reviews/3')
     assert response.status_code == status.HTTP_204_NO_CONTENT
+
+
+

@@ -39,6 +39,16 @@ def get_all_reviews_by_movie(movie_id, db: session):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
 
+def delete_review(review_id: int, db: session):
+    db_movie_review = db.query(Review).filter(Review.id == review_id).first()
+
+    if not db_movie_review:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'Book with ID: {review_id} not found!')
+
+    db.delete(db_movie_review)
+    db.commit()
+
+
 def get_average_rating_by_movie(movie_id, db: session):
     try:
 
