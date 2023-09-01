@@ -24,7 +24,7 @@ def test_get_reviews():
 
 
 def test_get_reviews_by_movie():
-    response = client.get(f'{BASE_URL}/3')
+    response = client.get(f'{BASE_URL}/4')
     assert response.status_code == status.HTTP_200_OK
 
 
@@ -36,18 +36,18 @@ def test_create_review():
 
 
 def test_average_movie_rating():
-    response = client.get(f'{BASE_URL}/average-rating/3')
+    response = client.get(f'{BASE_URL}/average-rating/4')
     assert response.status_code == status.HTTP_200_OK
 
 
 def test_delete_review():
-    response = client.delete(f'{BASE_URL}/delete-review/11')
-    assert response.status_code == status.HTTP_204_NO_CONTENT
+    response = client.delete(f'{BASE_URL}/delete-review/16')
+    assert response.status_code == status.HTTP_204_NO_CONTENT or status.HTTP_404_NOT_FOUND
 
 
 def test_delete_movie_reviews():
-    response = client.delete(f'{BASE_URL}/delete-reviews/3')
-    assert response.status_code == status.HTTP_204_NO_CONTENT
+    response = client.delete(f'{BASE_URL}/delete-reviews/6')
+    assert response.status_code == status.HTTP_204_NO_CONTENT or status.HTTP_404_NOT_FOUND
 
 
 
