@@ -29,7 +29,7 @@ def test_get_reviews_by_movie():
 
 
 def test_create_review():
-    response = client.post(f'{BASE_URL}/3', json=data)
+    response = client.post(f'{BASE_URL}/4', json=data)
     review_id = response.json()['id']
     assert response.status_code == status.HTTP_201_CREATED
     assert response.json()['id'] == review_id

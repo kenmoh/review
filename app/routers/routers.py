@@ -2,7 +2,7 @@ from fastapi import APIRouter, status,  Depends
 from sqlalchemy.orm import Session
 
 from app.database.database import get_db
-from app.schemas.schemas import ReviewResponseSchema, ReviewCreateSchema
+from app.schemas.schemas import ReviewResponseSchema, ReviewCreateSchema, AverageMovieRating
 from app.services import services
 
 
@@ -25,7 +25,7 @@ def get_movie_reviews(movie_id: int, db: Session = Depends(get_db)) -> list[Revi
 
 
 @review_router.get('/average-rating/{movie_id}', status_code=status.HTTP_200_OK)
-def get_movie_avg_rating(movie_id: int, db: Session = Depends(get_db)) -> float:
+def get_movie_avg_rating(movie_id: int, db: Session = Depends(get_db)) -> AverageMovieRating:
     return services.get_average_rating_by_movie(movie_id, db)
 
 

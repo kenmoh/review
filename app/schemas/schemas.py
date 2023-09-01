@@ -11,3 +11,6 @@ class ReviewResponseSchema(ReviewCreateSchema):
     id: int
     movie_id: int
 
+
+class AverageMovieRating(BaseModel):
+    average_rating: float
