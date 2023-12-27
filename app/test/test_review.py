@@ -9,7 +9,8 @@ HEALTH_URL = 'http://127.0.0.1:8000'
 data = {
     "author": "Lee Sammy",
     "comment": "Testing",
-    "rating": 4
+    "rating": 4,
+    "ip_address": '127.0.0.1'
 }
 
 
@@ -29,13 +30,8 @@ def test_get_reviews_by_movie():
 
 
 def test_create_review(request: Request):
-    data_create = {
-        "author": "Lee Sammy",
-        "comment": "Testing",
-        "rating": 4,
-        "ip_address": '127.0.0.1'
-    }
-    response = client.post(f'{BASE_URL}/4', json=data_create)
+
+    response = client.post(f'{BASE_URL}/572802', json=data)
     review_id = response.json()['id']
     assert response.status_code == status.HTTP_201_CREATED
     assert response.json()['id'] == review_id
