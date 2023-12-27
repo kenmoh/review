@@ -10,7 +10,7 @@ class ReviewCreateSchema(BaseModel):
 class ReviewResponseSchema(ReviewCreateSchema):
     id: int
     movie_id: int
-    ip_address: str
+    ip_address: str | None
 
 
 class AverageMovieRating(BaseModel):
