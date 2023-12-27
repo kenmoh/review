@@ -10,6 +10,7 @@ class ReviewCreateSchema(BaseModel):
 class ReviewResponseSchema(ReviewCreateSchema):
     id: int
     movie_id: int
+    ip_address: str
 
 
 class AverageMovieRating(BaseModel):
