@@ -1,4 +1,4 @@
-from sqlalchemy import Integer
+from sqlalchemy import Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.database.database import Base
@@ -12,4 +12,5 @@ class Review(Base):
     comment: Mapped[str]
     author: Mapped[str]
     rating: Mapped[int] = mapped_column(Integer, nullable=True)
+    ip_address: Mapped[str] = mapped_column(String, nullable=True)
 

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, status,  Depends
+from fastapi import APIRouter, status,  Depends, Request
 from sqlalchemy.orm import Session
 
 from app.database.database import get_db
@@ -15,8 +15,9 @@ def get_reviews(db: Session = Depends(get_db)) -> list[ReviewResponseSchema]:
 
 
 @review_router.post('/{movie_id}', status_code=status.HTTP_201_CREATED)
-def add_review(movie_id, review: ReviewCreateSchema, db: Session = Depends(get_db)) -> ReviewResponseSchema:
-    return services.add_new_review(movie_id, review, db)
+def add_review(movie_id, review: ReviewCreateSchema, request: Request, db: Session = Depends(get_db)) -> ReviewResponseSchema:
+    ip_address = request = request.client.host
+    return services.add_new_review(movie_id=movie_id, review=review, db=db, ip_address=ip_address)
 
 
 @review_router.get('/{movie_id}', status_code=status.HTTP_200_OK)

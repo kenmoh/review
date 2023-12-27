@@ -12,7 +12,18 @@ def get_all_reviews(db: session):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
 
-def add_new_review(movie_id: int, review: ReviewCreateSchema, db: session):
+def add_new_review(movie_id: int, ip_address: str, review: ReviewCreateSchema, db: session):
+    existing_review = (
+        db.query(Review)
+        .filter(Review.movie_id == movie_id, Review.ip_address == ip_address)
+        .first()
+    )
+
+    if existing_review:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="You already reviewed this movie!",
+        )
     try:
         with session.begin():
 
@@ -20,7 +31,8 @@ def add_new_review(movie_id: int, review: ReviewCreateSchema, db: session):
                 movie_id=movie_id,
                 author=review.author,
                 comment=review.comment,
-                rating=review.rating
+                rating=review.rating,
+                ip_address=ip_address
             )
             db.add(new_review)
             db.commit()
