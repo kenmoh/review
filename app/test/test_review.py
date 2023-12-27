@@ -10,7 +10,7 @@ data = {
     "author": "Lee Sammy",
     "comment": "Testing",
     "rating": 4,
-    "ip_address": '127.0.0.1'
+    "ip_address": '127.0.0.2'
 }
 
 
