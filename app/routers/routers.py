@@ -16,7 +16,7 @@ def get_reviews(db: Session = Depends(get_db)) -> list[ReviewResponseSchema]:
 
 @review_router.post('/{movie_id}', status_code=status.HTTP_201_CREATED)
 def add_review(movie_id, review: ReviewCreateSchema, request: Request, db: Session = Depends(get_db)) -> ReviewResponseSchema:
-    ip_address = request = request.client.host
+    ip_address = request.client.host
     return services.add_new_review(movie_id=movie_id, review=review, db=db, ip_address=ip_address)
 
 
