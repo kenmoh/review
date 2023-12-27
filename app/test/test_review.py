@@ -1,4 +1,4 @@
-from fastapi import status
+from fastapi import status, Request
 from fastapi.testclient import TestClient
 
 from app.main import app
@@ -28,8 +28,14 @@ def test_get_reviews_by_movie():
     assert response.status_code == status.HTTP_200_OK
 
 
-def test_create_review():
-    response = client.post(f'{BASE_URL}/4', json=data)
+def test_create_review(request: Request):
+    data_create = {
+        "author": "Lee Sammy",
+        "comment": "Testing",
+        "rating": 4,
+        "ip_address": request.client.host
+    }
+    response = client.post(f'{BASE_URL}/4', json=data_create)
     review_id = response.json()['id']
     assert response.status_code == status.HTTP_201_CREATED
     assert response.json()['id'] == review_id
@@ -48,6 +54,3 @@ def test_delete_review():
 def test_delete_movie_reviews():
     response = client.delete(f'{BASE_URL}/delete-reviews/6')
     assert response.status_code == status.HTTP_204_NO_CONTENT or status.HTTP_404_NOT_FOUND
-
-
-
