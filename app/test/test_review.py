@@ -33,7 +33,7 @@ def test_create_review(request: Request):
         "author": "Lee Sammy",
         "comment": "Testing",
         "rating": 4,
-        "ip_address": request.client.host
+        "ip_address": '127.0.0.1'
     }
     response = client.post(f'{BASE_URL}/4', json=data_create)
     review_id = response.json()['id']
